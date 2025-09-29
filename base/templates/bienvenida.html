@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Bienvenido - Sistema de Usuarios{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body text-center">
+                <h1 class="card-title">¡Bienvenido al Sistema de Usuarios!</h1>
+                <p class="card-text">Gestiona usuarios de manera fácil y segura con nuestro sistema CRUD completo.</p>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">¿Ya tienes cuenta?</h5>
+                                <p class="card-text">Inicia sesión para acceder a tu dashboard.</p>
+                                <a href="{{ url_for('users.login_form') }}" class="btn btn-primary">Iniciar Sesión</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">¿Nuevo usuario?</h5>
+                                <p class="card-text">Regístrate para comenzar a usar el sistema.</p>
+                                <a href="{{ url_for('users.new') }}" class="btn btn-success">Registrarse</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <a href="{{ url_for('users.index') }}" class="btn btn-outline-primary">Ver Todos los Usuarios</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

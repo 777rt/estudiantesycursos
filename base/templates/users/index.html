@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Usuarios{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Lista de Usuarios</h1>
+    <a href="{{ url_for('users.new') }}" class="btn btn-success">Nuevo Usuario</a>
+</div>
+
+{% if users %}
+    <div class="row">
+        {% for user in users %}
+        <div class="col-md-6 col-lg-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ user.name }}</h5>
+                    <p class="card-text">
+                        <strong>Email:</strong> {{ user.email }}<br>
+                        <strong>Registrado:</strong> {{ user.created_at.strftime('%d/%m/%Y') }}
+                    </p>
+                    <div class="btn-group" role="group">
+                        <a href="{{ url_for('users.show', user_id=user.id) }}" class="btn btn-outline-primary btn-sm">Ver</a>
+                        <a href="{{ url_for('users.edit', user_id=user.id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
+                        <form method="POST" action="{{ url_for('users.delete', user_id=user.id) }}" class="d-inline" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este usuario?')">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-info">
+        <h4>No hay usuarios registrados</h4>
+        <p>Comienza creando tu primer usuario.</p>
+        <a href="{{ url_for('users.new') }}" class="btn btn-primary">Crear Usuario</a>
+    </div>
+{% endif %}
+{% endblock %}

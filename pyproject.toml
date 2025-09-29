@@ -1,0 +1,22 @@
+[tool.pyright]
+# Configuración para Pyright/BasedPyright
+pythonVersion = "3.11"
+pythonPlatform = "Windows"
+
+# Configuración de importaciones
+include = ["base", "app.py", "server.py"]
+exclude = ["**/node_modules", "**/__pycache__"]
+
+# Suprimir advertencias específicas
+reportMissingImports = "warning"
+reportMissingTypeStubs = "none"
+reportUnknownMemberType = "none"
+reportUnknownArgumentType = "none"
+reportUnknownVariableType = "none"
+
+# Configuración de tipos
+typeCheckingMode = "basic"
+useLibraryCodeForTypes = true
+
+# Configuración de rutas
+extraPaths = ["."]
