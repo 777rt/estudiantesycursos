@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Estudiantes y cursos</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <div class="brand"><a href="/" style="color:inherit; text-decoration:none;"><strong>Estudiantes y cursos</strong></a></div>
+                <nav>
+                    <a href="{{ url_for('cursos.index') }}">Cursos</a>
+                    <a href="{{ url_for('estudiantes.index') }}">Estudiantes</a>
+                </nav>
+            </div>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for category, msg in messages %}
+                    <li class="{{ category }}">{{ msg }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <main class="container-main">
+            <div class="card">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Nuevo Estudiante</h1>
+  <form action="{{ url_for('estudiantes.create_estudiante') }}" method="post">
+    <label>Nombre</label>
+    <input type="text" name="nombre">
+    <label>Apellido</label>
+    <input type="text" name="apellido">
+    <label>Email</label>
+    <input type="text" name="email">
+    <label>Curso</label>
+    <select name="curso_id">
+      <option value="">-- Selecciona un curso --</option>
+      {% for c in cursos %}
+        <option value="{{ c.id }}">{{ c.nombre }}</option>
+      {% endfor %}
+    </select>
+    <button class="btn" type="submit">Crear estudiante</button>
+  </form>
+{% endblock %}

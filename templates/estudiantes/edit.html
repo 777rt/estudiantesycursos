@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Editar Estudiante</h1>
+  <form action="{{ url_for('estudiantes.update', estudiante_id=estudiante.id) }}" method="post">
+    <label>Nombre</label>
+    <input type="text" name="nombre" value="{{ estudiante.nombre }}">
+    <label>Apellido</label>
+    <input type="text" name="apellido" value="{{ estudiante.apellido }}">
+    <label>Email</label>
+    <input type="text" name="email" value="{{ estudiante.email }}">
+    <label>Curso</label>
+    <select name="curso_id">
+      {% for c in cursos %}
+        <option value="{{ c.id }}" {% if c.id == estudiante.curso_id %}selected{% endif %}>{{ c.nombre }}</option>
+      {% endfor %}
+    </select>
+    <button class="btn" type="submit">Guardar</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div style="display:flex; justify-content:space-between; align-items:center">
+    <h1>Estudiantes</h1>
+    <a class="btn" href="{{ url_for('estudiantes.new_estudiante') }}">+ Nuevo estudiante</a>
+  </div>
+
+  {% if estudiantes %}
+    <table class="table">
+      <thead><tr><th>Nombre</th><th>Apellido</th><th>Email</th><th>Curso ID</th><th></th></tr></thead>
+      <tbody>
+        {% for est in estudiantes %}
+          <tr>
+            <td>{{ est.nombre }}</td>
+            <td>{{ est.apellido }}</td>
+            <td>{{ est.email }}</td>
+            <td>{{ est.curso_id }}</td>
+            <td style="text-align:right">
+              <a class="btn ghost" href="{{ url_for('estudiantes.show', estudiante_id=est.id) }}">Ver</a>
+              <a class="btn ghost" href="{{ url_for('estudiantes.edit', estudiante_id=est.id) }}">Editar</a>
+              <form action="{{ url_for('estudiantes.delete', estudiante_id=est.id) }}" method="POST" style="display: inline;">
+                <button type="submit" class="btn ghost" onclick="return confirm('¿Estás seguro de que deseas eliminar este estudiante?')">Eliminar</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No hay estudiantes registrados.</p>
+  {% endif %}
+{% endblock %}

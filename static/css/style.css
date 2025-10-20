@@ -1,0 +1,117 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  margin: 0;
+  padding: 0;
+  background: #f6f8fa;
+  color: #222;
+}
+
+header {
+  background: #000000;
+  color: #fff;
+  padding: 34px 20px;
+}
+
+header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav a {
+  color: #fff;
+  margin-left: 12px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.container-main {
+  max-width: 980px;
+  margin: 28px auto;
+  padding: 0 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 18px;
+  box-shadow: 0 6px 18px rgba(20,20,20,0.06);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 900px) {
+  .grid-2 { grid-template-columns: 1fr 320px; }
+}
+
+.flashes {
+  list-style: none;
+  padding: 0;
+  margin: 12px auto;
+  max-width: 980px;
+}
+
+.flashes li { 
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.flashes li.success { background: #e6fffa; border: 1px solid #b2f5ea; color: #0b5345 }
+.flashes li.error { background: #fff5f5; border: 1px solid #fed7d7; color: #742a2a }
+
+.btn {
+  display: inline-block;
+  background: #000000;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.btn.secondary {
+  background: #6b7280;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: #000000;
+  border: 1px solid rgba(43,108,176,0.12);
+}
+
+/* Tables */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th, .table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #eef2f7;
+}
+.table th { color: #4b5563; font-weight: 600; font-size: 14px; }
+
+/* Forms */
+label { display:block; margin-bottom:6px; color:#374151; font-weight:600 }
+input[type="text"], textarea, select {
+  width:100%;
+  padding:10px 12px;
+  border:1px solid #e6edf3;
+  border-radius:6px;
+  background:#fff;
+  box-sizing:border-box;
+}
+textarea { min-height:120px }
+
+.form-row { margin-bottom:12px }
+
+.actions { display:flex; gap:8px; align-items:center }
+
+.brand { font-size:18px }
+
+.list-inline { padding: 0; margin: 0; }
+.list-inline li { display: inline-block; margin-right: 8px; }

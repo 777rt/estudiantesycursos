@@ -1,39 +1,38 @@
-#Proyecto para usuarios 
-#Importaremos el modulo flask
+import os
 from flask import Flask
-from flask_bcrypt import Bcrypt  # type: ignore
+from flask_bcrypt import Bcrypt
 
-#Inicializa Bcrypt (sin pasar la app todavia)
 bcrypt = Bcrypt()
 
+
 def create_app():
-    #Creamos la instancia de la app
-    app = Flask(__name__)
+    # Determinar rutas del proyecto para templates y static (carpeta raíz del proyecto)
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    templates_path = os.path.join(project_root, 'templates')
+    static_path = os.path.join(project_root, 'static')
 
-    #Configuramos la clave secreta directamente para el desarrollo
-    app.secret_key = 'TP4medioB'
+    app = Flask(__name__, template_folder=templates_path, static_folder=static_path, static_url_path='/static')
+    app.config['SECRET_KEY'] = 'dev_secret_key'
 
-    #Vincular Bcrypt a la aplicacion
+    # Inicializar extensiones
     bcrypt.init_app(app)
 
-    #--Registro de Blueprints--
-    #Importamos los blueprints (asegurate que esten bien
-    #Definidos en sus respectivos archivos)
-    from .controllers import user_controller #El punto indica la importacion relativa
-    from .models import estudiantes_controller, cursos_controller
+    # Registrar blueprints si existen (cursos, estudiantes)
+    try:
+        from base.models.cursos_controller import cursos_bp
+        app.register_blueprint(cursos_bp)
+    except Exception:
+        pass
 
-    #Registramos los blueprints
-    app.register_blueprint(user_controller.user_bp)
-    app.register_blueprint(estudiantes_controller.estudiantes_bp)
-    app.register_blueprint(cursos_controller.cursos_bp)
+    try:
+        from base.models.estudiantes_controller import estudiantes_bp
+        app.register_blueprint(estudiantes_bp)
+    except Exception:
+        pass
 
-    #Ruta principal que redirige a la pagina de inicio o registro/login
+    # Ruta raíz: redirige a /cursos si existe esa área
     @app.route('/')
-    def index():
-        from flask import redirect, session, render_template
-        #Importaciones locales para evitar problemas de importacion circular
-        if 'user_id' in session: 
-            return redirect('/dashboard')
-        return render_template('bienvenida.html')
-    
+    def index_root():
+        from flask import redirect, url_for
+        return redirect(url_for('cursos.index'))
     return app

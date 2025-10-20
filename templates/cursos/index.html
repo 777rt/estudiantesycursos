@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div style="display:flex; justify-content:space-between; align-items:center">
+    <h1>Cursos</h1>
+    <a class="btn" href="{{ url_for('cursos.new') }}">+ Nuevo curso</a>
+  </div>
+
+  {% if cursos %}
+    <table class="table">
+      <thead><tr><th>Nombre</th><th>Descripción</th><th></th></tr></thead>
+      <tbody>
+        {% for curso in cursos %}
+          <tr>
+            <td>{{ curso.nombre }}</td>
+            <td>{{ curso.descripcion }}</td>
+            <td style="text-align:right">
+              <a class="btn ghost" href="{{ url_for('cursos.show', curso_id=curso.id) }}">Ver</a>
+              <a class="btn ghost" href="{{ url_for('cursos.edit', curso_id=curso.id) }}">Editar</a>
+              <form action="{{ url_for('cursos.delete', curso_id=curso.id) }}" method="POST" style="display: inline;">
+                <button type="submit" class="btn ghost" onclick="return confirm('¿Estás seguro de que deseas eliminar este curso?')">Eliminar</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No hay cursos todavía.</p>
+  {% endif %}
+{% endblock %}

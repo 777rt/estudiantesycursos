@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ curso.nombre }}</h1>
+  <p>{{ curso.descripcion }}</p>
+
+  <div style="margin-top:1rem">
+    <a class="btn" href="{{ url_for('cursos.index') }}">Volver</a>
+    <a class="btn ghost" href="{{ url_for('cursos.edit', curso_id=curso.id) }}">Editar</a>
+  </div>
+
+  <h2 style="margin-top:2rem">Estudiantes inscritos</h2>
+  {% if curso.estudiantes %}
+    <table class="table">
+      <thead><tr><th>Nombre</th><th>Apellido</th><th>Email</th><th></th></tr></thead>
+      <tbody>
+        {% for e in curso.estudiantes %}
+          <tr>
+            <td>{{ e.nombre }}</td>
+            <td>{{ e.apellido }}</td>
+            <td>{{ e.email }}</td>
+            <td style="text-align:right">
+              <a class="btn ghost" href="#">Ver</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No hay estudiantes inscritos en este curso.</p>
+  {% endif %}
+{% endblock %}

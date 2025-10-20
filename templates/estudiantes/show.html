@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ estudiante.nombre }} {{ estudiante.apellido }}</h1>
+  <p><strong>Email:</strong> {{ estudiante.email }}</p>
+  <p><strong>Curso ID:</strong> {{ estudiante.curso_id }}</p>
+
+  <div style="margin-top:1rem">
+    <a class="btn" href="{{ url_for('estudiantes.index') }}">Volver</a>
+    <a class="btn ghost" href="{{ url_for('estudiantes.edit', estudiante_id=estudiante.id) }}">Editar</a>
+  </div>
+{% endblock %}
